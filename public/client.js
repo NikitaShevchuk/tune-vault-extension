@@ -98,6 +98,7 @@ function createCustomStyles() {
       align-items: center;
       gap: 10px;
       justify-content: center;
+      flex-wrap: wrap;
     }
     .tune-vault-play {
       width: 15px;
