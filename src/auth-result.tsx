@@ -1,18 +1,29 @@
-import { Alert, Avatar, Button, Spinner, Typography } from "@material-tailwind/react";
+import React from "react";
+import {
+  Alert,
+  Avatar,
+  Button,
+  Spinner,
+  Typography,
+} from "@material-tailwind/react";
 
 import { useUser } from "src/hooks";
-import { apiBaseUrl } from "./constants";
+import { apiBaseUrl, appUrl } from "src/constants";
 
 export function AuthResult() {
   const { error, isLoading, user } = useUser();
 
   const onLoginClick = () => window.open(`${apiBaseUrl}/auth`, "_blank");
 
+  React.useEffect(updateCookies, []);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen gap-4">
         <Spinner color="blue-gray" />
-        <Typography className="text-blue-gray-100 text-xl font-bold">Loading...</Typography>
+        <Typography className="text-blue-gray-100 text-xl font-bold">
+          Loading...
+        </Typography>
       </div>
     );
   }
@@ -20,7 +31,12 @@ export function AuthResult() {
   if (error) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Button onClick={onLoginClick} size="sm" variant="outlined" color="white">
+        <Button
+          onClick={onLoginClick}
+          size="sm"
+          variant="outlined"
+          color="white"
+        >
           Login with Discord
         </Button>
       </div>
@@ -36,8 +52,12 @@ export function AuthResult() {
           alt="Avatar"
           placeholder={"https://cdn.discordapp.com/embed/avatars/0.png"}
         />
-        <Typography className="text-blue-gray-100 text-xl font-bold">{user?.globalName}</Typography>
-        <Typography className="text-blue-gray-100 text-xl">({user?.username})</Typography>
+        <Typography className="text-blue-gray-100 text-xl font-bold">
+          {user?.globalName}
+        </Typography>
+        <Typography className="text-blue-gray-100 text-xl">
+          ({user?.username})
+        </Typography>
       </div>
       <Alert color="green" className="w-fit">
         <Typography className="text-blue-gray-100 text-lg font-semibold">
@@ -46,4 +66,16 @@ export function AuthResult() {
       </Alert>
     </div>
   );
+}
+
+function updateCookies() {
+  chrome.cookies?.get({ url: appUrl, name: "token" }, (cookie) => {
+    if (!cookie) {
+      return;
+    }
+    const token = cookie.value;
+
+    const tenDays = 864_000;
+    document.cookie = `token=${token};path=/;max-age=${tenDays};`;
+  });
 }

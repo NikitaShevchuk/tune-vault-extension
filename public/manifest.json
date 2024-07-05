@@ -12,8 +12,21 @@
   "action": {
     "default_popup": "../index.html"
   },
-  "permissions": [ "tabs" ],
-  "host_permissions": [
-    "http://localhost:5001/"
-  ]
+  "permissions": ["tabs", "cookies", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["https://youtube.com/*", "https://music.youtube.com/*"],
+      "js": ["client.js"]
+    }
+  ],
+  "host_permissions": ["http://localhost:5001/*", "http://localhost:3000/*"],
+  "web_accessible_resources": [
+    {
+      "matches": ["https://youtube.com/*", "https://music.youtube.com/*"],
+      "resources": ["index.html"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }
