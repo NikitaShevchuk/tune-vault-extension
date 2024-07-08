@@ -2,12 +2,12 @@ import useSWR from "swr";
 
 import { HttpService } from "src/utils";
 import { apiBaseUrl } from "src/constants";
-import { User } from "src/models";
+import { TuneVaultUser } from "src/models";
 
 export function useUser() {
   const { data, isLoading, error } = useSWR(
-    `${apiBaseUrl}/auth/me`,
-    (url) => new HttpService().get<User>(url),
+    `${apiBaseUrl}/user/me`,
+    (url) => new HttpService().get<TuneVaultUser>(url),
     {
       revalidateOnFocus: true,
       shouldRetryOnError: true,

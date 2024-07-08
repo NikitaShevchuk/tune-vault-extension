@@ -39,7 +39,9 @@ export class HttpService {
     });
   }
 
-  public async get<T>(...args: Parameters<Axios["get"]>): Promise<AxiosResponse<T>> {
+  public async get<T>(
+    ...args: Parameters<Axios["get"]>
+  ): Promise<AxiosResponse<T>> {
     try {
       return this.transformResponse(await this.axiosInstance.get<T>(...args));
     } catch (error) {
@@ -48,7 +50,9 @@ export class HttpService {
     }
   }
 
-  public async post<T>(...args: Parameters<Axios["post"]>): Promise<AxiosResponse<T>> {
+  public async post<T>(
+    ...args: Parameters<Axios["post"]>
+  ): Promise<AxiosResponse<T>> {
     try {
       return this.transformResponse(await this.axiosInstance.post<T>(...args));
     } catch (error) {
@@ -57,7 +61,9 @@ export class HttpService {
     }
   }
 
-  public async put<T>(...args: Parameters<Axios["put"]>): Promise<AxiosResponse<T>> {
+  public async put<T>(
+    ...args: Parameters<Axios["put"]>
+  ): Promise<AxiosResponse<T>> {
     try {
       return this.transformResponse(await this.axiosInstance.put<T>(...args));
     } catch (error) {
@@ -65,9 +71,13 @@ export class HttpService {
     }
   }
 
-  public async delete<T>(...args: Parameters<Axios["delete"]>): Promise<AxiosResponse<T>> {
+  public async delete<T>(
+    ...args: Parameters<Axios["delete"]>
+  ): Promise<AxiosResponse<T>> {
     try {
-      return this.transformResponse(await this.axiosInstance.delete<T>(...args));
+      return this.transformResponse(
+        await this.axiosInstance.delete<T>(...args),
+      );
     } catch (error) {
       // TODO: Add sentry logging
       throw error;
@@ -76,7 +86,10 @@ export class HttpService {
 
   private transformResponse<T>(response: AxiosResponse<T>) {
     if (this.config?.transformToCamelCase) {
-      return { ...response, data: transformSnakeCaseToCamelCase(response.data) };
+      return {
+        ...response,
+        data: transformSnakeCaseToCamelCase(response.data),
+      };
     }
     return response;
   }

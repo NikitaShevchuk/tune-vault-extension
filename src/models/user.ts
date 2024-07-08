@@ -3,7 +3,7 @@ export enum Role {
   user = "user",
 }
 
-export interface User {
+export interface TuneVaultUser {
   id: string;
   username: string;
   globalName: string;

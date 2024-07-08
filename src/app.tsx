@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 
 function App() {
   return (
-    <ThemeProvider>
+    <ThemeProvider value={{}}>
       <Layout>
         <AuthResult />
       </Layout>
