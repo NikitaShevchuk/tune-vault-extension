@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
   }
 
   chrome.cookies?.get(
-    { url: "http://localhost:3000/", name: "token" },
+    { url: "http://tune-vault-ui.vercel.app/", name: "token" },
     (cookie) => {
       if (!cookie) {
         return;
@@ -22,14 +22,17 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
           ? `https://www.youtube.com/watch?v=${id}`
           : `https://www.youtube.com/playlist?list=${id}`;
 
-      fetch("http://localhost:5001/discord/play", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+      fetch(
+        "https://tune-vault-lb-1978840688.us-east-1.elb.amazonaws.com/discord/play",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ url }),
         },
-        body: JSON.stringify({ url }),
-      });
+      );
     },
   );
 
