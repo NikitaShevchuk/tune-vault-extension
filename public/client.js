@@ -84,6 +84,10 @@ function appnedButtonsToElements(node) {
     chrome.runtime.sendMessage({ message: id, type }, (response) => {
       console.log({ RESPONSE: response?.message });
     });
+
+    setTimeout(() => {
+      alert("АРТЬОМ ЛОХ!!!! 😂😂😂");
+    }, 2000);
   });
 
   node.appendChild(playButton);
