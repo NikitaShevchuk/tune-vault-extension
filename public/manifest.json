@@ -23,7 +23,7 @@
     "http://localhost:3001/*",
     "http://localhost:3000/*",
     "https://tune-vault-ui.vercel.app/*",
-    "https://tune-vault-lb-1978840688.us-east-1.elb.amazonaws.com/*"
+    "https://tune-vault-api.online/*"
   ],
   "web_accessible_resources": [
     {
