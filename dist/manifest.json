@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Tune Vault",
+  "version": "0.0.1",
+  "description": "Effortlessly play music on your favorite Discord server!",
+  "icons": {
+    "16": "./logo-16.png",
+    "32": "./logo-32.png",
+    "48": "./logo-48.png",
+    "128": "./logo-128.png"
+  },
+  "action": {
+    "default_popup": "../index.html"
+  },
+  "permissions": ["tabs", "cookies", "scripting"],
+  "content_scripts": [
+    {
+      "matches": ["https://youtube.com/*", "https://music.youtube.com/*"],
+      "js": ["client.js"]
+    }
+  ],
+  "host_permissions": [
+    "http://localhost:3001/*",
+    "http://localhost:3000/*",
+    "https://tune-vault-ui.vercel.app/*",
+    "https://tune-vault-api.online/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": ["https://youtube.com/*", "https://music.youtube.com/*"],
+      "resources": ["index.html"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
