@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
   }
 
   chrome.cookies?.get(
-    { url: "https://tune-vault-api.online", name: "token" },
+    { url: "https://tunevault.online", name: "token" },
     (cookie) => {
       if (!cookie) {
         return;
@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
           ? `https://www.youtube.com/watch?v=${id}`
           : `https://www.youtube.com/playlist?list=${id}`;
 
-      fetch("https://tune-vault-api.online/discord/play", {
+      fetch("https://api.tunevault.online/discord/play", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

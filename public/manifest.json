@@ -22,8 +22,8 @@
   "host_permissions": [
     "http://localhost:3001/*",
     "http://localhost:3000/*",
-    "https://tune-vault-ui.vercel.app/*",
-    "https://tune-vault-api.online/*"
+    "https://tunevault.online/*",
+    "https://api.tunevault.online/*"
   ],
   "web_accessible_resources": [
     {
